@@ -5,7 +5,7 @@ Contains various utility classes useful in the financial services industry in no
 Can validate and parse bank account numbers for all swedish banks according to the specification from BGC (http://www.bgc.se/upload/Gemensamt/Trycksaker/Manualer/BG910.pdf).
 
 Note:
-There are some older swedbank account numbers that are in real but have an invalid check digit. These will be rejected by this class.
+There are some older swedbank account numbers that are real but have an invalid check digit. These will be rejected by this class.
 
 ###Parsing an account number:
 
