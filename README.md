@@ -8,17 +8,19 @@ Note:
 There are some older swedbank account numbers that are real but have an invalid check digit. These will be rejected by this class.
 
 ###Parsing an account number:
+```c#
+var a = BankAccountSe.CreateBankAccount("8888,1234 567-4");
 
-    var a = BankAccountSe.CreateBankAccount("8888,1234 567-4");
-
-    //Result
-    Assert.AreEqual("Swedbank", a.Bank);
-    Assert.AreEqual("8888", a.ClearingNumber);
-    Assert.AreEqual("12345674", a.AccountNumber);
+//Result
+Assert.AreEqual("Swedbank", a.Bank);
+Assert.AreEqual("8888", a.ClearingNumber);
+Assert.AreEqual("12345674", a.AccountNumber);
+```
 
 ###Validating an account number:
+```c#
+var isValid = BankAccountSe.IsValidBankAccount("8888,1234 567-4");
 
-    var isValid = BankAccountSe.IsValidBankAccount("8888,1234 567-4");
-
-    //Result
-    Assert.IsTrue(isValid);
+//Result
+Assert.IsTrue(isValid);
+```
