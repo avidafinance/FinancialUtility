@@ -7,7 +7,7 @@ namespace Avida.FinancialUtility.Algorithms
         /// <summary>
         /// Returns the check digit for a string of numbers. Use when needed to create a mod-10 valid number, append the check digit last in the number.
         /// </summary>
-        /// <param name="value">An arbirtrary number without a check digit.</param>
+        /// <param name="value">An arbitrary number without a check digit.</param>
         /// <returns>The mod-10 check digit for the supplied number.</returns>
         public static int GetMod10CheckDigit(string value)
         {
