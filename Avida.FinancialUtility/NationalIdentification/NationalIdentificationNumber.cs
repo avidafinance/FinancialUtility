@@ -2,7 +2,7 @@
 
 namespace Avida.FinancialUtility.NationalIdentification
 {
-    public abstract class NationalIdentificationNumber
+    internal abstract class NationalIdentificationNumber
     {
         public abstract string NormalForm { get; }
         public abstract bool IsCompany { get; }

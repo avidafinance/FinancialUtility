@@ -2,7 +2,7 @@
 
 namespace Avida.FinancialUtility.Algorithms
 {
-    public class ModulusCheck
+    internal class ModulusCheck
     {
         /// <summary>
         /// Returns the check digit for a string of numbers. Use when needed to create a mod-10 valid number, append the check digit last in the number.

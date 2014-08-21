@@ -8,7 +8,7 @@ namespace Avida.FinancialUtility.NationalIdentification
     /// <summary>
     /// Represents a Swedish civic registration number.
     /// </summary>
-    public class CivicRegNumberSe : NationalIdentificationNumber, IComparable<CivicRegNumberSe>, IEquatable<CivicRegNumberSe>
+    internal class CivicRegNumberSe : NationalIdentificationNumber, IComparable<CivicRegNumberSe>, IEquatable<CivicRegNumberSe>
     {
         /// <summary>
         /// Declare a string which represents a single 12 digit civic registration number.
