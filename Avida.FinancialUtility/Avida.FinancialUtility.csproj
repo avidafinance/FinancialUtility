@@ -45,9 +45,12 @@
     <Compile Include="Bank\Se\BankAccountSe.cs" />
     <Compile Include="Bank\Se\ClearingNumberRange.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="NationalIdentification\CivicRegNumberFi.cs" />
     <Compile Include="NationalIdentification\CivicRegNumberSe.cs" />
     <Compile Include="NationalIdentification\NationalIdentificationNumber.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utilities\Age.cs" />
+    <Compile Include="Utilities\DateTimes.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
