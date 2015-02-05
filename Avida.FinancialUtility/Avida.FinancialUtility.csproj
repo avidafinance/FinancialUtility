@@ -45,10 +45,12 @@
     <Compile Include="Bank\Se\BankAccountSe.cs" />
     <Compile Include="Bank\Se\ClearingNumberRange.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="NationalIdentification\CivicRegNumberNo.cs" />
     <Compile Include="NationalIdentification\CivicRegNumberFi.cs" />
     <Compile Include="NationalIdentification\CivicRegNumberSe.cs" />
     <Compile Include="NationalIdentification\IndividualDateOfBirth.cs" />
     <Compile Include="NationalIdentification\NationalIdentificationNumber.cs" />
+    <Compile Include="NationalIdentification\OrganisationNumberNo.cs" />
     <Compile Include="NationalIdentification\OrganisationNumberFi.cs" />
     <Compile Include="NationalIdentification\OrganisationNumberSe.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
