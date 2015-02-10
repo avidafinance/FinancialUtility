@@ -196,5 +196,50 @@ namespace Avida.FinancialUtility.NationalIdentification
         public override string NormalForm { get { return this.TwelveDigitNormalForm; } }
         public override bool IsCompany { get { return false; } }
         public override string CountryTwoLetterIsoCode { get { return "SE"; } }
+
+        public DateTime DateOfBirth
+        {
+            get
+            {
+                var year = nr.Substring(0, 4);
+                var dateString = String.Format("{0}-{1}-{2}", year, nr.Substring(4, 2), nr.Substring(6, 2));
+                DateTime d;
+
+                if (!DateTime.TryParseExact(dateString, "yyyy-MM-dd", CultureInfo.GetCultureInfo("sv-SE"), DateTimeStyles.None, out d))
+                    throw new Exception("Invalid date");
+                return d;
+            }
+        }
+
+        public static int GetAgeInYears(CivicRegNumberSe n, DateTime now)
+        {
+            var dob = n.DateOfBirth;
+            int currentYear = now.Year;
+            int currentMonth = now.Month;
+            int currentDay = now.Day;
+
+            if (currentYear < dob.Year)
+                throw new ArgumentException("This date is in the future");
+            var age = currentYear - dob.Year;
+
+            if (currentMonth == dob.Month && currentDay < dob.Day)
+            {
+                age = age - 1;
+            }
+            else if (currentMonth < dob.Month)
+            {
+                age = age - 1;
+            }
+
+            return age;
+        }
+
+        public int AgeInYears
+        {
+            get 
+            {
+                return GetAgeInYears(this, DateTime.Today);
+            }
+        }
     }
 }
