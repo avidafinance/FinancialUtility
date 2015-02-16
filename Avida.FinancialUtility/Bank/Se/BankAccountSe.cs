@@ -29,6 +29,7 @@ namespace Avida.FinancialUtility.Bank.Se
         /// <summary>
         /// 4 digits clearing number + 12 digits account number
         /// according to various arcane rules (http://www.bgc.se/upload/Gemensamt/Trycksaker/Manualer/BG910.pdf)
+        /// Newer spec: http://www.bgc.se/globalassets/dokument/tekniska-manualer/bankernaskontonummeruppbyggnad_tekniskmanual_sv.pdf
         /// </summary>
         public string GetBankFileRepresentation()
         {
@@ -143,7 +144,6 @@ namespace Avida.FinancialUtility.Bank.Se
 
             // Assign clearing number
             AccountNumberValidator.CheckClearingNumber(clearingNumber);
-            bankAccount.ClearingNumber = clearingNumber;
 
             // Assign account type and bank
             var bankAndAccountNumberType = ClearingNumberRange.GetBankAndAccountNumberType(clearingNumber);
@@ -154,6 +154,7 @@ namespace Avida.FinancialUtility.Bank.Se
             // Assign account number
             AccountNumberValidator.CheckAccountNumber(ref clearingNumber, ref accountNumber, bankAndAccountNumberType.Item2, bankAccount.Bank == ClearingNumberRange.SwebankName);
             bankAccount.AccountNumber = accountNumber;
+            bankAccount.ClearingNumber = clearingNumber;
 
             if (bankAccount.AccountNumberType == AccountNumberType.Type5 && bankAccount.Bank == ClearingNumberRange.SwebankName && bankAccount.ClearingNumber.Length == 5)
             {
