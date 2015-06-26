@@ -41,7 +41,7 @@ namespace Avida.FinancialUtility.NationalIdentification
         public static bool TryParse(string nr, out CivicRegNumberFi result, out string errorMessage)
         {
             result = null;
-            nr = (nr ?? "").RemoveAll(" ");
+            nr = (nr ?? "").RemoveAll(" ").ToUpperInvariant();
             if (nr.Length != 11)
             {
                 errorMessage = "Invalid string length";
@@ -156,7 +156,7 @@ namespace Avida.FinancialUtility.NationalIdentification
             get
             {
                 var datePart = this.nr.Substring(0, 6);
-                var centuryMarker = nr.Substring(6, 1);
+                var centuryMarker = nr.Substring(6, 1).ToUpperInvariant();
 
                 return DateTimes.ParseDateExact(datePart.Substring(0, 4) + (centuryMarker == "-" ? "19" : (centuryMarker == "A" ? "20" : "18")) + datePart.Substring(4, 2), "ddMMyyyy").Value;
             }
