@@ -19,30 +19,48 @@ namespace Avida.FinancialUtility.NationalIdentification
             return TryParse(s, out _);
         }
 
-        private static readonly int[] Weights = new int[] { 3, 2, 7, 6, 5, 4, 3, 2 };
-
         public static bool TryParse(string nr, out OrganisationNumberNo result)
         {
             //Format: http://www.brreg.no/samordning/organisasjonsnummer.html
-
             result = null;
 
             var digits = (nr ?? "").Where(Char.IsDigit).ToArray();
             if (digits.Length != 9)
                 return false;
-            
+
             var digitsStr = new string(digits);
             var n = digits.Select(x => int.Parse(Char.ToString(x))).ToArray();
-
-            var k = 11 - (Weights.Zip(n.Take(8), (x, y) => x * y).Aggregate(0, (x, y) => x + y) % 11);
+            var k = GetControlDigit(nr);
             if (k >= 10)
                 return false;
             if (k != n[8])
                 return false;
 
             result = new OrganisationNumberNo(digitsStr);
-
             return true;
+        }
+
+        private static int GetControlDigit(string orgnr)
+        {
+            int sumForMod = 0;
+            int controlNumber = 2;
+            char[] knr = orgnr.ToCharArray();
+
+            for (int i = knr.Length - 2; i >= 0; i--)
+            {
+                sumForMod += (int)(char.GetNumericValue(knr[i]) * controlNumber);
+                controlNumber++;
+                if (controlNumber > 7)
+                {
+                    controlNumber = 2;
+                }
+            }
+            int calculus = (11 - sumForMod % 11);
+            if (calculus == 11)
+            {
+                return 0;
+            }
+            return calculus;
         }
 
         private OrganisationNumberNo(string nr)
