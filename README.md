@@ -2,7 +2,7 @@
 Contains various utility classes useful in the financial services industry in nordic countries.
 
 ##Class: [BankAccountSe](Avida.FinancialUtility/Bank/Se/BankAccountSe.cs)
-Can validate and parse bank account numbers for all swedish banks according to the specification from BGC (http://www.bgc.se/upload/Gemensamt/Trycksaker/Manualer/BG910.pdf).
+Can validate and parse bank account numbers for all swedish banks according to the specification from BGC (https://www.bankgirot.se/globalassets/dokument/anvandarmanualer/bankernaskontonummeruppbyggnad_anvandarmanual_sv.pdf).
 
 Note:
 There are some older swedbank account numbers that are real but have an invalid check digit. These will be rejected by this class.
