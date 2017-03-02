@@ -11,6 +11,9 @@ namespace Avida.FinancialUtility.Tests
     [TestClass]
     public class SwedenTests
     {
+        /// <summary>
+        /// Simple test of age.
+        /// </summary>
         [TestMethod]
         public void TestAge()
         {
