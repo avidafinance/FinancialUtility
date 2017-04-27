@@ -2,29 +2,20 @@
 
 namespace Avida.FinancialUtility.Bank.Se
 {
-    public class BankAccountSe
+    public class BankAccountSe : IBankAccount
     {
         private BankAccountSe()
         {
         }
 
-        public string ClearingNumber { get; private set; }
+        public string Bank { get; private set; }
         public string AccountNumber { get; private set; }
+        public string ClearingNumber { get; private set; }
 
         /// <summary>
         /// The account number type, which specifies how to calculate the check sum.
         /// </summary>
         public AccountNumberType AccountNumberType { get; private set; }
-
-        /// <summary>
-        /// The bank that the account belongs to.
-        /// </summary>
-        public string Bank { get; private set; }
-
-        public string GetCanonicalStringRepresentation()
-        {
-            return string.Format("{0}{1}", this.ClearingNumber, this.AccountNumber);
-        }
 
         /// <summary>
         /// 4 digits clearing number + 12 digits account number
@@ -171,6 +162,11 @@ namespace Avida.FinancialUtility.Bank.Se
         public override string ToString()
         {
             return string.Format("Bank: {0}, Clearing: {1}, Account: {2}", this.Bank, this.ClearingNumber, this.AccountNumber);
+        }
+
+        public string GetCanocialStringRepresentation()
+        {
+            return string.Format("{0}{1}", this.ClearingNumber, this.AccountNumber);
         }
     }
 }

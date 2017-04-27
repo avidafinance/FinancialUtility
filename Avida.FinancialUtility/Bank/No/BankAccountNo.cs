@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Avida.FinancialUtility.Bank.No
 {
-    public class BankAccountNo
+    public class BankAccountNo : IBankAccount
     {
         private BankAccountNo()
         {
@@ -17,11 +17,6 @@ namespace Avida.FinancialUtility.Bank.No
         public string ClearingNumber { get; private set; }
         public string AccountNumber { get; private set; }
         public string Bank { get; private set; }
-
-        public string GetCanocialStringRepresentation()
-        {
-            return string.Format("{0}{1}", this.ClearingNumber, this.AccountNumber);
-        }
 
         public static bool IsvalidBankAccount(string nr, string bankRegisterFilePath)
         {
@@ -100,9 +95,18 @@ namespace Avida.FinancialUtility.Bank.No
             return bankAccount;
         }
 
+        /// <summary>
+        /// Returns a System.String representation of this object.
+        /// </summary>
+        /// <returns>A System.String reprsentation of this object.</returns>
         public override string ToString()
         {
             return string.Format("Bank: {0}, Clearing: {1}, Account: {2}", this.Bank, this.ClearingNumber, this.AccountNumber);
+        }
+
+        public string GetCanocialStringRepresentation()
+        {
+            return string.Format("{0}{1}", this.ClearingNumber, this.AccountNumber);
         }
     }
 }

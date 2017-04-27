@@ -40,6 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Algorithms\ModulusCheck.cs" />
+    <Compile Include="Bank\IBankAccount.cs" />
     <Compile Include="Bank\No\AccountNumberType.cs" />
     <Compile Include="Bank\No\AccountNumberValidator.cs" />
     <Compile Include="Bank\No\BankAccountNo.cs" />
