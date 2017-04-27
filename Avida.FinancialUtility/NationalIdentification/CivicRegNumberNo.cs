@@ -128,5 +128,44 @@ namespace Avida.FinancialUtility.NationalIdentification
                 return null;
             return d;
         }
+
+
+        public static int GetAgeInYears(CivicRegNumberNo n, DateTime now)
+        {
+            if (n.BirthDateIfValid.HasValue)
+            {
+                var dob = n.BirthDateIfValid.Value;
+                int currentYear = now.Year;
+                int currentMonth = now.Month;
+                int currentDay = now.Day;
+
+                if (currentYear < dob.Year)
+                    throw new ArgumentException("This date is in the future");
+                var age = currentYear - dob.Year;
+
+                if (currentMonth == dob.Month && currentDay < dob.Day)
+                {
+                    age = age - 1;
+                }
+                else if (currentMonth < dob.Month)
+                {
+                    age = age - 1;
+                }
+
+                return age;
+            }
+            else
+            {
+                throw new Exception("BirthDate is not valid");
+            }
+        }
+
+        public int AgeInYears
+        {
+            get
+            {
+                return GetAgeInYears(this, DateTime.Today);
+            }
+        }
     }
 }

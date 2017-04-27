@@ -1,4 +1,5 @@
-﻿using Avida.FinancialUtility.NationalIdentification;
+﻿using Avida.FinancialUtility.Bank.No;
+using Avida.FinancialUtility.NationalIdentification;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;

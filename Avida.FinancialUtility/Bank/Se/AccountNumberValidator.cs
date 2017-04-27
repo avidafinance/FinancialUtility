@@ -71,7 +71,7 @@ namespace Avida.FinancialUtility.Bank.Se
             if (!IsInteger(clearingNumber)) throw new ArgumentException("clearingNumber must be numeric.");
 
             if (clearingNumber.Length > 5 || clearingNumber.Length < 4)
-                throw new ArgumentException(string.Format("clearingNumber is {0} characters long. Expected length is 4-5 charcters.", clearingNumber.Length));
+                throw new ArgumentException(string.Format("clearingNumber is {0} characters long. Expected length is 4-5 characters.", clearingNumber.Length));
         }
 
         /// <summary>
