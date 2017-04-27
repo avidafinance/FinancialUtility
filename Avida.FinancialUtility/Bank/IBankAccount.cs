@@ -21,5 +21,6 @@ namespace Avida.FinancialUtility.Bank
         /// </summary>
         string Bank { get;  }
         string GetCanonicalStringRepresentation();
+        string GetBankFileRepresentation();
     }
 }

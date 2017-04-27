@@ -41,6 +41,11 @@ namespace Avida.FinancialUtility.Bank.No
             }
         }
 
+        public string GetBankFileRepresentation()
+        {
+            return GetCanonicalStringRepresentation();
+        }
+
         public static BankAccountNo CreateBankAccount(string accountNumber, string bankRegisterFilePath)
         {
             var cleaned = AccountNumberValidator.Clean(accountNumber) ?? "";
