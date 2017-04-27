@@ -104,7 +104,7 @@ namespace Avida.FinancialUtility.Bank.No
             return string.Format("Bank: {0}, Clearing: {1}, Account: {2}", this.Bank, this.ClearingNumber, this.AccountNumber);
         }
 
-        public string GetCanocialStringRepresentation()
+        public string GetCanonicalStringRepresentation()
         {
             return string.Format("{0}{1}", this.ClearingNumber, this.AccountNumber);
         }

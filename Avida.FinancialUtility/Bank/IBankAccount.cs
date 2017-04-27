@@ -20,6 +20,6 @@ namespace Avida.FinancialUtility.Bank
         /// The bank that the account belongs to.
         /// </summary>
         string Bank { get;  }
-        string GetCanocialStringRepresentation();
+        string GetCanonicalStringRepresentation();
     }
 }
