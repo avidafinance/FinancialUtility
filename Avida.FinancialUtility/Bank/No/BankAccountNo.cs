@@ -18,18 +18,18 @@ namespace Avida.FinancialUtility.Bank.No
         public string AccountNumber { get; private set; }
         public string Bank { get; private set; }
 
-        public static bool IsvalidBankAccount(string nr, string bankRegisterFilePath)
+        public static bool IsvalidBankAccount(string nr, IEnumerable<string> bankRegisterLines)
         {
             BankAccountNo _;
             string __;
-            return TryParseBankAccount(nr, out _, out __, bankRegisterFilePath);
+            return TryParseBankAccount(nr, out _, out __, bankRegisterLines);
         }
 
-        public static bool TryParseBankAccount(string source, out BankAccountNo bankAccount, out string errMsg, string bankRegisterFilePath)
+        public static bool TryParseBankAccount(string source, out BankAccountNo bankAccount, out string errMsg, IEnumerable<string> bankRegisterLines)
         {
             try
             {
-                bankAccount = CreateBankAccount(source, bankRegisterFilePath);
+                bankAccount = CreateBankAccount(source, bankRegisterLines);
                 errMsg = null;
                 return true;
             }
@@ -46,7 +46,7 @@ namespace Avida.FinancialUtility.Bank.No
             return GetCanonicalStringRepresentation();
         }
 
-        public static BankAccountNo CreateBankAccount(string accountNumber, string bankRegisterFilePath)
+        public static BankAccountNo CreateBankAccount(string accountNumber, IEnumerable<string> bankRegisterLines)
         {
             var cleaned = AccountNumberValidator.Clean(accountNumber) ?? "";
 
@@ -59,7 +59,7 @@ namespace Avida.FinancialUtility.Bank.No
             ArgumentException norwegianAccountException = null;
             try
             {
-                norwegianAccount = CreateBankAccount(cleaned.Substring(0, 4), cleaned.Substring(4), bankRegisterFilePath);
+                norwegianAccount = CreateBankAccount(cleaned.Substring(0, 4), cleaned.Substring(4), bankRegisterLines);
             }
             catch (ArgumentException ex)
             {
@@ -72,7 +72,7 @@ namespace Avida.FinancialUtility.Bank.No
             return norwegianAccount;
         }
 
-        public static BankAccountNo CreateBankAccount(string clearingNumber, string accountNumber, string bankRegisterFilePath)
+        public static BankAccountNo CreateBankAccount(string clearingNumber, string accountNumber, IEnumerable<string> bankRegisterLines)
         {
             if (string.IsNullOrEmpty(clearingNumber)) throw new ArgumentException("clearingNumber must not be null or empty string.");
             if (string.IsNullOrEmpty(accountNumber)) throw new ArgumentException("accountNumber must not be null or empty string.");
@@ -86,7 +86,7 @@ namespace Avida.FinancialUtility.Bank.No
             AccountNumberValidator.CheckClearingNumber(clearingNumber);
 
             // Assign account type and bank
-            var bankAndAccountNumberType = ClearingNumberData.GetBankAndAccountNumberType(clearingNumber, bankRegisterFilePath);
+            var bankAndAccountNumberType = ClearingNumberData.GetBankAndAccountNumberType(clearingNumber, bankRegisterLines);
             if ((bankAccount.AccountNumberType = bankAndAccountNumberType.Item2) == AccountNumberType.Unknown)
                 throw new ArgumentException("Unknown clearingNumber. Could not match clearing number to a known bank.");
             bankAccount.Bank = bankAndAccountNumberType.Item1;
