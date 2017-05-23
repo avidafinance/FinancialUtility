@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace Avida.FinancialUtility.Algorithms
 {
@@ -70,6 +71,32 @@ namespace Avida.FinancialUtility.Algorithms
             }
 
             return (sum % 11) == 0;
+        }
+
+        /// <summary>
+        /// Checks if a Norwegian account number is a valid
+        /// </summary>
+        /// <param name="value">11 characters long account number</param>
+        /// <returns>true if valid, else false</returns>
+        public static bool AccountMod11CheckNo(string value)
+        {
+            // A Norwegian account number that is checked with mod-11 is 11 characters long
+            if (value.Length != 11)
+                return false;
+            //Check for only numbers
+            if (!Regex.IsMatch(value, @"^\d+$"))
+                return false;
+            
+            int sum = 0;
+            //https://no.wikipedia.org/wiki/MOD11
+            int[] weights = new[] { 5, 4, 3, 2, 7, 6, 5, 4, 3, 2 };
+
+
+            for (int i = 0; i < value.Length - 1; i++)
+            {
+                sum += int.Parse(value[i].ToString()) * weights[i];
+            }
+            return (11 - (sum % 11)) == int.Parse(value[value.Length - 1].ToString());
         }
     }
 }

@@ -51,7 +51,7 @@ namespace Avida.FinancialUtility.Bank.No
 
             string checkValue = string.Concat(clearingNumber, accountNumber);
 
-            if (!ModulusCheck.Mod11(checkValue))
+            if (!ModulusCheck.AccountMod11CheckNo(checkValue))
                 throw new ArgumentException(string.Format("accountNumber has an invalid checksum (Type 1)."));
         }
 
