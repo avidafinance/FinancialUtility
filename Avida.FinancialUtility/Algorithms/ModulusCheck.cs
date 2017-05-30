@@ -86,7 +86,7 @@ namespace Avida.FinancialUtility.Algorithms
             //Check for only numbers
             if (!Regex.IsMatch(value, @"^\d+$"))
                 return false;
-            
+
             int sum = 0;
             //https://no.wikipedia.org/wiki/MOD11
             int[] weights = new[] { 5, 4, 3, 2, 7, 6, 5, 4, 3, 2 };
@@ -96,7 +96,7 @@ namespace Avida.FinancialUtility.Algorithms
             {
                 sum += int.Parse(value[i].ToString()) * weights[i];
             }
-            return (11 - (sum % 11)) == int.Parse(value[value.Length - 1].ToString());
+            return (sum % 11 == 0 ? 0 : 11 - (sum % 11)) == int.Parse(value[value.Length - 1].ToString());
         }
     }
 }
