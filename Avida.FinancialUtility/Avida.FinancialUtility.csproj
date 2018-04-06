@@ -2,6 +2,16 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <PackageId>FinancialUtility</PackageId>
+    <Version>2.0.0</Version>
+    <Authors>Avida Finans AB</Authors>
+    <Product />
+    <Description>Library of utility methods for financial calculations.</Description>
+    <Copyright>Copyright 2018</Copyright>
+    <PackageLicenseUrl>https://github.com/avidafinance/FinancialUtility/blob/master/LICENSE.md</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/avidafinance/FinancialUtility</PackageProjectUrl>
+    <PackageIconUrl>https://www.avidafinance.com/favicon-152x152.png</PackageIconUrl>
+    <PackageTags>finance bank account</PackageTags>
   </PropertyGroup>
 
 </Project>
