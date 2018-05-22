@@ -14,6 +14,19 @@ namespace Avida.FinancialUtility.NationalIdentification
         /// </summary>
         private string nr;
 
+        /// <summary>
+        /// Century ranges for norwegian individual numbers. 
+        /// Based on KITH-standard in Norway (http://kith.no/upload/5588/KITH1001-2010_Identifikatorer-for-personer_v1.pdf)
+        /// </summary>
+        private static readonly List<(int Start, int End, string Century)> centuryRanges = 
+            new List<(int Start, int End, string Century)>
+                {
+                    (0, 499, "19"),   // individual numbers between years 1900-1999
+                    (500, 749, "18"), // individual numbers between years 1854-1899
+                    (900, 999, "19"), // individual numbers between years 1940-1999
+                    (500, 999, "20")  // individual numbers between years 2000-2039
+                };
+
         public override string ToString()
         {
             return this.nr;
@@ -121,10 +134,38 @@ namespace Avida.FinancialUtility.NationalIdentification
             return true;
         }
 
+        /// <summary>
+        /// Returns century of a individual number.
+        /// 
+        /// ddMMyyiiicc
+        ///    ___^^^_____________
+        ///    |individual number|
+        ///    
+        /// 
+        /// </summary>
+        /// <param name="individualDigits"> The individual digits of the social security number </param>
+        /// <returns></returns>
+        private static string GetCenturyOfIndividualDigits(string individualDigits)
+        {
+            int iDig = Int32.Parse(individualDigits);
+            for(int i = 0; i < centuryRanges.Count; ++i)
+            {
+                if(iDig >= centuryRanges[i].Start && iDig <= centuryRanges[i].End)
+                {
+                    return centuryRanges[i].Century;
+                }
+            }
+
+            return null;
+        }
+
         private static DateTime? ParseBirthDateFromNr(string nr)
         {
+            String century = GetCenturyOfIndividualDigits(nr.Substring(6, 3));
+            String birthdate = nr.Substring(0, 4) + century + nr.Substring(4, 2);
             DateTime d;
-            if (!DateTime.TryParseExact(nr.Substring(0, 6), "ddMMyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out d))
+            
+            if (!DateTime.TryParseExact(birthdate, "ddMMyyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out d))
                 return null;
             return d;
         }

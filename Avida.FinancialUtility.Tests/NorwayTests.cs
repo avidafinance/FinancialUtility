@@ -19,6 +19,12 @@ namespace Avida.FinancialUtility.Tests
             CivicRegNumberNo n1;
             Assert.IsTrue(CivicRegNumberNo.TryParse("11077941012", out n1, forceCorrectBirthDate:true));
             Assert.AreEqual(new DateTime(1979, 7, 11), n1.BirthDateIfValid.Value);
+            Assert.IsTrue(CivicRegNumberNo.TryParse("02101935593", out n1, forceCorrectBirthDate: true));
+            Assert.AreEqual(new DateTime(1919, 10, 2), n1.BirthDateIfValid.Value);
+            Assert.IsTrue(CivicRegNumberNo.TryParse("12037674174", out n1, forceCorrectBirthDate: true));
+            Assert.AreEqual(new DateTime(1876, 3, 12), n1.BirthDateIfValid.Value);
+            Assert.IsTrue(CivicRegNumberNo.TryParse("12031284366", out n1, forceCorrectBirthDate: true));
+            Assert.AreEqual(new DateTime(2012, 3, 12), n1.BirthDateIfValid.Value);
         }
 
         [TestMethod]
