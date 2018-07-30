@@ -145,23 +145,39 @@ namespace Avida.FinancialUtility.NationalIdentification
         /// </summary>
         /// <param name="individualDigits"> The individual digits of the social security number </param>
         /// <returns></returns>
-        private static string GetCenturyOfIndividualDigits(string individualDigits)
+        private static string GetCenturyOfIndividualDigits(string individualDigits,string yy)
         {
             int iDig = Int32.Parse(individualDigits);
-            for(int i = 0; i < centuryRanges.Count; ++i)
+            List<int> tempCentury = new List<int>();
+            string century = null;
+            for (int i = 0; i < centuryRanges.Count; ++i)
             {
-                if(iDig >= centuryRanges[i].Start && iDig <= centuryRanges[i].End)
+                if (iDig >= centuryRanges[i].Start && iDig <= centuryRanges[i].End)
                 {
-                    return centuryRanges[i].Century;
+                    tempCentury.Add(Int32.Parse(centuryRanges[i].Century));
                 }
             }
+            if (tempCentury.Count() > 1)
+            {
+                int year;
+                //the indivisual numbers may fall in more than one century range, below code handle the this scenario
+                century = tempCentury.Max().ToString();
+                if(Int32.TryParse((century + yy),out year))
+                {
+                    if (year > System.DateTime.Now.Year)
+                        century = tempCentury.Min().ToString();
+                }
 
-            return null;
+            }
+            else if (tempCentury.Count() > 0)
+                century = tempCentury.FirstOrDefault().ToString();
+
+            return century;
         }
 
         private static DateTime? ParseBirthDateFromNr(string nr)
         {
-            String century = GetCenturyOfIndividualDigits(nr.Substring(6, 3));
+            String century = GetCenturyOfIndividualDigits(nr.Substring(6, 3), nr.Substring(4, 2));
             String birthdate = nr.Substring(0, 4) + century + nr.Substring(4, 2);
             DateTime d;
             
