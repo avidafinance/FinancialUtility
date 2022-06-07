@@ -59,7 +59,8 @@ namespace Avida.FinancialUtility.Bank.Se
                                  new Tuple<string, int, int, AccountNumberType>("Sparbanken Öresund AB (fd Spb Finn, fd Spb Gripen)", 9300, 9349, AccountNumberType.Type3),
                                  new Tuple<string, int, int, AccountNumberType>(SwebankName, 7000,7999, AccountNumberType.Type1),
                                  new Tuple<string, int, int, AccountNumberType>(SwebankName, 8000, 8999, AccountNumberType.Type5),
-                                 new Tuple<string, int, int, AccountNumberType>("Ålandsbanken Sverige AB", 2300, 2399, AccountNumberType.Type2)
+                                 new Tuple<string, int, int, AccountNumberType>("Ålandsbanken Sverige AB", 2300, 2399, AccountNumberType.Type2),
+                                 new Tuple<string, int, int, AccountNumberType>("Svea Bank AB", 9660, 9669, AccountNumberType.Type2)
                              };
 
             return ranges.ToArray();
